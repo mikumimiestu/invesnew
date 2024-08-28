@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi Market</title>
+  <link rel="stylesheet" href="assets/styles/styles.css">
+  <link rel="stylesheet" href="assets/styles/keuntungan.css">
+</head>
+<body>
+
+<header>
+  <span></span>
+  <a href="#logo">
+    <img src="assets/public/img/IMG_7347.PNG" alt="Logo">
+  </a>
+</header>
+
+<div id="chart-container">
+  <h5 id="h4style">INDEX GABUNGAN</h5>
+  <h6 id="currentDate" style="margin-top: -10px;"></h6>
+  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(0, 211, 0);">Rp5.800 (+1,1%)</b>
+
+  <!--Canvas Grafik-->
+  <canvas id="myChart" class="chart-container"></canvas>
+  <!--Canvas Grafik-->
+
+
+  <!-- Tombol share dengan ikon -->
+  <button id="share-button2">
+    <img src="assets/public/img/LOGO.png" alt="Share Icon" width="30" height="30">
+  </button>
+
+  <!-- Tombol share dengan ikon -->
+  <button id="share-button">
+    <img src="assets/public/img/share (1).png" alt="Share Icon" width="30" height="30">
+  </button>
+
+  <div id="time-range-buttons">
+    <button data-time-range="1d" onclick="updateChart('1d', this)">1D</button>
+    <button data-time-range="1w" onclick="updateChart('1w', this)">1W</button>
+    <button data-time-range="1m" onclick="updateChart('1m', this)">1M</button>
+    <button data-time-range="ytd" onclick="updateChart('ytd', this)">YTD</button>
+    <button data-time-range="1y" onclick="updateChart('1y', this)">1Y</button>
+    <button data-time-range="3y" onclick="updateChart('3y', this)">3Y</button>
+  </div>
+
+  <p id="marketStatus">Market Open</p>
+  <p id="marketCountdown" style="border-color: whitesmoke; background-color: rgba(255, 255, 255, 0); margin-bottom: -10px; margin-top: -10px;"></p>
+  
+  <div style="text-align: left; margin-left: 30px;">
+    <p style="margin-bottom: -12px;">Open <span style="color: green;">5,830</span></p>
+    <p style="margin-bottom: -12px;">High <span style="color: black;">5,830</span></p>
+    <p style="margin-bottom: -12px;">Low <span style="color: red;">5.770</span></p>
+  </div>
+  
+  <div style="text-align: right; margin-right: 30px;">
+    <p style="margin-bottom: -12px; margin-top: -60px;">ARA <span style="color: green;">6,350</span></p>
+    <p style="margin-bottom: -12px;">ARB <span style="color: red;">4,540</span></p>
+    <p style="margin-bottom: -12px;">Analisis 92% Buy</p>
+  </div>
+
+  <!-- Navigasi -->
+  <div class="nav-container">
+    <a href="javascript:void(0)" id="keuntungan-btn">KEUNTUNGAN</a>
+    <a href="javascript:void(0)" id="news-btn">NEWS</a>
+    <a href="javascript:void(0)" id="orderbook-btn">ORDER BOOK</a>
+    <a href="javascript:void(0)" id="financial-btn">LAPORAN KEUANGAN</a>
+    <a href="javascript:void(0)" id="corpaction-btn">CORP ACTION</a>
+    <a href="javascript:void(0)" id="holding-btn">TOP HOLDING</a>
+  </div>
+  
+
+  <!-- Konten Halaman -->
+  <div id="news-section" class="content-section">
+    <h3>NEWS</h3>
+    <p>Berita terbaru tentang saham belum tersedia saat ini.</p>
+  </div>
+
+  <!-- Bagian Order Book -->
+  <div id="orderbook-section" class="content-section" style="display:none;">
+    <table id="orderBook">
+      <thead>
+        <tr>
+          <th>Bid</th>
+          <th>Lot</th>
+          <th>Ask</th>
+          <th>Lot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data akan diisi melalui JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bagian Laporan Keuangan -->
+  <div id="financial-section" class="content-section" style="display:none;">
+    <h3>Laporan Keuangan</h3>
+    <p>Laporan keuangan belum tersedia.</p>
+  </div>
+
+  <!-- Bagian Corp Action -->
+  <div id="corpaction-section" class="content-section" style="display:none;">
+    <h3>CORP ACTION</h3>
+    <p>Tidak ada aksi korporasi saat ini.</p>
+  </div>
+
+
+  <!-- Bagian isi keuntungan -->
+  <div id="keuntungan-section" class="content-section" style="display:none;">
+    <h3>LIHAT KEUNTUNGAN</h3>
+    <p>Masukkan ID INVESTOR yang kamu miliki untuk melihat keuntungan</p>
+    <div class="containerdatainvestor">
+      <form id="dataForm">
+          <label for="id_pelanggan">ID Investor:</label>
+          <input type="text" id="id_pelanggan" name="id_pelanggan" required>
+          
+          <button type="submit">Periksa</button>
+      </form>
+      
+      <div id="result">
+          <h2>Hasil</h2>
+          <p>Nama: <span id="nama"></span></p>
+          <p>Total Dana: <span id="totalDana"></span></p>
+          <p>Keuntungan: <span id="keuntungan"></span></p>
+      </div>
+      
+      <div id="progressBarContainer">
+          <div id="progressBar">
+              <div id="progressBarFill">0%</div>
+          </div>
+      </div>
+  </div>
+</div>
+
+  <!-- Bagian Holding -->
+<div id="holding-section" class="content-section" style="display:none;">
+  <h3>TOP HOLDING</h3>
+  <b style="text-decoration: underline;">SAHAM BANK</b>
+  <p style="margin-bottom: -8px;">1. BBCA</p>
+  <p style="margin-bottom: -8px;">2. BMRI</p>
+  <p style="margin-bottom: -8px;">3. BNGA</p>
+  <p style="margin-bottom: -8px;">4. NISP</p>
+  <p style="margin-bottom: -8px;">5. BRIS</p>
+  <p style="margin-bottom: -8px;">6. BBTN</p>
+  <p style="margin-bottom: -8px;">7. BBRI</p>
+  <p style="margin-bottom: -8px;">8. BBNI</p>
+  <br>
+  <b style="text-decoration: underline;">SAHAM TAMBANG</b>
+  <p style="margin-bottom: -8px;">1. ADRO </p>
+  <p style="margin-bottom: -8px;">2. ADMR</p>
+  <p style="margin-bottom: -8px;">3. PTBA</p>
+  <p style="margin-bottom: -8px;">4. BREN</p>
+  <p style="margin-bottom: -8px;">5. BRPT</p>
+  <p style="margin-bottom: -8px;">6. CUAN</p>
+  <p style="margin-bottom: -8px;">7. ELSA</p>
+  <br>
+  <b style="text-decoration: underline;">SAHAM PROPERTI</b>
+  <p style="margin-bottom: -8px;">1. PWON </p>
+  <p style="margin-bottom: -8px;">2. CTRA</p>
+  <p style="margin-bottom: -8px;">3. BSDE</p>
+  <p style="margin-bottom: -8px;">4. PANI</p>
+</div>
+
+</div>
+
+<img src="assets/public/img/LOGO_+_NAME-removebg-preview.png" alt="" style="width: 110px; border-radius: 8px; display: block; margin: 40px auto 0 auto;">
+
+<div id="copyright">
+  &copy; 2024 XENZA INVESTAMA. All rights reserved.
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/source/script/script.js"></script>
+<script src="assets/source/script/orderbook.js"></script>
+<script src="assets/source/script/navdwon.js"></script>
+<script src="assets/source/script/api.js"></script>
+<script src="assets/source/script/grafik.js"></script>
+
+</body>
+</html>

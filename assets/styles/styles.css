@@ -1,0 +1,327 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background: #ffffff;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    position: fixed;
+    width: 100%; /* Memperlebar header agar penuh */
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan di bawah */
+    display: flex;
+    justify-content: flex-start; /* Menyusun elemen secara mulai dari kiri */
+    align-items: center;
+    top: 0;
+  }
+  
+  header img {
+    margin-left: -10px; /* Menghapus margin kiri untuk gambar */
+    margin-right: 20px; /* Memberikan sedikit jarak dengan elemen lainnya */
+    width: 180px; /* Mengatur lebar logo */
+    height: 50px; /* Mengatur tinggi logo */
+  }  
+  
+  
+  #chart-container {
+    width: 92%;
+    margin: auto;
+    position: relative;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #time-range-buttons {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  
+  #time-range-buttons button {
+    margin: 5px;
+    border-radius: 0px;
+    border: none; /* Menghilangkan border atas, kiri, dan kanan */
+    border-bottom: 2px solid transparent; /* Border bawah default transparan */
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6px 8px;
+    cursor: pointer;
+    width: 150px;
+    transition: all 0.3s ease; /* Transisi halus */
+  }
+  
+  #time-range-buttons button.active, 
+  #time-range-buttons button:focus {
+    border-bottom-color: #abb0bd8a; /* Warna biru di bagian border bawah saat aktif atau fokus */
+    color: #000000; /* Warna teks tetap hitam */
+    background-color: #ffffff; /* Background tetap putih */
+    
+  }
+  
+  #time-range-buttons button:hover:not(.active) {
+    border-bottom-color: #0051ff; /* Border bawah biru saat hover jika tombol tidak aktif */
+  }
+  
+  
+  #myChart {
+    flex: 1;
+  }
+  
+  #chart-description {
+    text-align: center;
+    margin-top: 20px;
+    color: #000000;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  #chart-description h3 {
+    text-align: left;
+  }
+  
+  #chart-description p {
+    text-align: left;
+    margin: 5px 0;
+  }
+  
+  #orderBookContainer {
+    margin-top: 20px;
+    overflow-x: auto;
+    border-radius: 10px;
+  }
+  
+  #orderBook {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Arial', sans-serif; /* Mengubah gaya tulisan */
+    font-size: 14px; /* Membuat tulisan sedikit lebih kecil */
+  }
+  
+  #orderBook th, #orderBook td {
+    border: 1px solid #ddd;
+    padding: 6px; /* Sesuaikan padding jika diperlukan */
+  }
+  
+  #orderBook th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  #marketOpenIndicator {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blinker 1s linear infinite;
+    margin-right: 5px;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  #copyright {
+    text-align: center;
+    margin-top: 20px;
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    #time-range-buttons button {
+      width: auto;
+      margin: 5px;
+    }
+  }
+  
+  #marketCountdown {
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  #help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #00000000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #help-button:hover {
+    background-color: #0b7dda00;
+  }
+  
+  .bold-text {
+    font-weight: bold;
+  }
+  .red-text {
+    color: red;
+  }
+  .green-text {
+    color: green;
+  }
+  
+  .silver-text {
+    color: silver;
+  }
+  
+  .yellow-text {
+    color: rgb(255, 230, 0);
+  }
+
+  #orderBookContainer {
+    max-width: 100%;
+    margin: 20px auto;
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #orderBook {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  #orderBook thead {
+    background-color: #4CAF50;
+    color: rgb(0, 0, 0);
+  }
+  
+  #orderBook th,
+  #orderBook td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+  
+  #orderBook tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+  }
+  
+  #orderBook tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #orderBook tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  #orderBook th {
+    position: sticky;
+    top: 0;
+  }
+  
+  #orderBook tbody td {
+    color: #333;
+  }
+  
+  #orderBookContainer {
+    margin-top: 30px;
+  }
+
+/* Styles khusus untuk navigasi */
+.nav-container {
+  margin-top: 30px;
+  display: flex;
+  overflow-x: auto; /* Memungkinkan scroll horizontal jika tombol melebihi lebar kontainer */
+  white-space: nowrap; /* Mencegah tombol berpindah baris */
+  padding: 10px 0; /* Padding atas dan bawah */
+  border-bottom: 2px solid #ffffff; /* Border bawah untuk pemisah */
+  background-color: #ffffff; /* Latar belakang kontainer */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0); /* Menambahkan bayangan halus */
+  scroll-behavior: smooth; /* Halus saat menggulir */
+}
+
+/* Gaya tombol navigasi */
+.nav-container > a {
+  text-decoration: none;
+  color: #000000;
+  padding: 4px 0px; /* Mengurangi padding untuk memperkecil ukuran tombol */
+  margin: 0 10px; /* Menambahkan jarak di antara tombol */
+  border: none; /* Menghilangkan border default */
+  font-weight: bold;
+  font-size: 12px; /* Mengatur ukuran font tombol */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  display: inline-block; /* Pastikan tombol tidak meluas */
+  position: relative; /* Untuk memposisikan border bawah */
+}
+
+/* Gaya tombol saat di-hover */
+.nav-container > a:hover {
+  color: #007bff; /* Warna teks saat di-hover */
+}
+
+/* Gaya tombol aktif */
+.nav-container > a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* Sesuaikan jarak dari teks */
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #007bff; /* Warna garis bawah biru */
+}
+
+/* Menghilangkan scrollbar untuk kontainer saat tidak diperlukan */
+.nav-container::-webkit-scrollbar {
+  height: 8px; /* Mengatur tinggi scrollbar */
+}
+
+.nav-container::-webkit-scrollbar-thumb {
+  background: #ccc; /* Warna scrollbar */
+  border-radius: 10px;
+}
+
+.nav-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Latar belakang track scrollbar */
+}
+
+/* Styles khusu share dan logo */
+#share-button {
+  position: absolute;
+  top: 83px; /* Berada di bagian atas container grafik */
+  right: 10px; /* Di sebelah kanan */
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#share-button img {
+  width: 20px;
+  height: 20px;
+}
+
+#share-button2 {
+  position: absolute;
+  top: 20px; /* Berada di bagian atas container grafik */
+  right: -5px; /* Di sebelah kanan */
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#share-button2 img {
+  width: 40px;
+  height: 40px;
+  border-radius: 56px;
+}

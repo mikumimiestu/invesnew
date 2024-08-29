@@ -152,7 +152,7 @@ function updateChart(timeRange) {
     let borderColor;
     let shadowColor;
     
-    if (timeRange === '' || timeRange === '1w' || timeRange === '') {
+    if (timeRange === '' || timeRange === '' || timeRange === '') {
       borderColor = 'rgb(255, 0, 0)'; // Warna merah 
       shadowColor = 'rgba(255, 0, 0, 0.8)'; // Bayangan merah
     } else {

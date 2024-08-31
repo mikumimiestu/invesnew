@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Pembelian</title>
+    <link rel="stylesheet" href="pembelian.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-icon">
+            <img src="../assets/public/img/left-arrow.png" alt="Kembali" />
+        </a>        
+        <h1>Halaman Pembelian</h1>
+    </header>
+
+    <div class="form-container">
+        <form id="purchaseForm">
+            <div class="form-group">
+                <label for="investorCode">Kode Investor:</label>
+                <input type="text" id="investorCode" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Jumlah (Rp):</label>
+                <div class="input-container">
+                    <input type="number" id="amount" min="5000" required>
+                    <span class="currency-symbol">Rp</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Jenis Pembayaran:</label>
+                <select id="paymentMethod" required>
+                    <option value="">Pilih Pembayaran</option>
+                    <option value="qris">QRIS <span class="green-text">Gratis</span></option>
+                    <option value="va">Virtual Account <span class="green-text">Gratis</span></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="purchaseType">Jenis Pembelian:</label>
+                <select id="purchaseType" required>
+                    <option value="sekali">Sekali Beli</option>
+                    <option value="berjangka">Berjangka</option>
+                </select>
+            </div>
+
+            <div class="total">
+                <label for="totalPurchase">Total Pembelian (termasuk 0,05% biaya layanan):</label>
+                <p id="totalPurchase">Rp 0</p>
+            </div>
+
+            <button type="button" id="continueBtn">Lanjutkan</button>
+        </form>
+
+        <div id="summary" style="display:none;">
+            <h2>Ringkasan Pembelian</h2>
+            <p><strong>Kode Investor:</strong> <span id="summaryInvestorCode"></span></p>
+            <p><strong>Jumlah:</strong> <span id="summaryAmount"></span></p>
+            <p><strong>Jenis Pembayaran:</strong> <span id="summaryPaymentMethod"></span></p>
+            <p><strong>Jenis Pembelian:</strong> <span id="summaryPurchaseType"></span></p>
+            <button id="finishBtn">Selesai</button>
+        </div>
+
+        <div id="finalMessage" style="display:none;">
+            <p>Transaksi tahap proses max 3 hari kerja, tidak termasuk Sabtu, Minggu, dan libur nasional.</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Your Company
+    </footer>
+
+    <script src="pembelian.js"></script>
+</body>
+</html>

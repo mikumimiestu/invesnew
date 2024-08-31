@@ -1,0 +1,174 @@
+/* Basic styling for the body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    box-sizing: border-box;
+}
+
+/* Styling for the header */
+header {
+    position: fixed;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space between back icon and header title */
+    border-bottom: 2px solid #ddd; /* Optional: add a border to distinguish header */
+}
+
+/* Styling for the back icon */
+.back-icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Adds space below the icon */
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.back-icon img {
+    width: 16px; /* Adjust the size of the icon */
+    height: 16px; /* Maintain aspect ratio */
+    border: 2px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 4px; /* Adds space between the border and the image */
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.back-icon img:hover {
+    border-color: #aaa; /* Darker gray on hover */
+}
+
+
+/* Header title */
+header h1 {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+    flex: 1; /* Ensures the title takes available space */
+    display: flex;
+    align-items: center; /* Center title vertically */
+}
+
+/* Container for the form to ensure proper spacing */
+.form-container {
+    margin-top: 80px; /* Adjusted for header height */
+    padding: 20px;
+    position: relative;
+}
+
+/* Styling for form elements */
+form {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 4px;
+}
+
+/* Styling for form groups */
+.form-group {
+    margin-bottom: 20px; /* Adds space between form elements */
+}
+
+/* Styling for the form input */
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+input[type="number"] {
+    width: calc(100% - 60px); /* Space for currency symbol */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.currency-symbol {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: -1px; /* Adjust to align with input field */
+}
+
+/* Styling for the select element */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Green color for "Gratis" text */
+.green-text {
+    color: green;
+}
+
+/* Styling for the total purchase section */
+.total {
+    margin-top: 10px;
+}
+
+/* Styling for the footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 10px;
+    }
+
+    input[type="number"] {
+        width: calc(100% - 40px);
+    }
+
+    .currency-symbol {
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 10px;
+    }
+
+    select {
+        width: 100%;
+    }
+}
+/* Styling for the buttons */
+button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Adds space between form elements and buttons */
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+button:focus {
+    outline: none; /* Remove default outline on focus */
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5); /* Add custom focus outline */
+}

@@ -6,9 +6,10 @@
   <title>Informasi Market</title>
   <link rel="stylesheet" href="assets/styles/styles.css">
   <link rel="stylesheet" href="assets/styles/keuntungan.css">
+  <link rel="stylesheet" href="assets/styles/sidebar.css">
+  <link rel="stylesheet" href="assets/styles/warning.css">
 </head>
 <body>
-
 <header>
   <span></span>
   <a href="#logo">
@@ -16,10 +17,29 @@
   </a>
 </header>
 
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="src/pembelian.html">| Pembelian</a>
+  <a href="https://wa.me/6287777483865?text=saya%20ini%20menjual%20aset%20saya">| Penjualan</a>
+  <a href="https://xenzadigitalgroup.github.io/lapor/">| Lapor Masalah</a>
+  <a href="https://wa.me/6287777483865?text=saya%20ingin%20mendaftar%20untuk%20investasi">| Daftar investasi</a>  
+  <a href="https://xenzadigitalgroup.github.io/404/">Login</a>
+  <p class="copyright">&copy; 2024 XENZA DIGITAL GROUP. All rights reserved.</p>
+</div>
+
+<!-- Desktop Warning -->
+<div class="desktop-warning">
+  Halaman ini hanya dapat diakses melalui perangkat mobile.
+</div>
+
+<!-- Button to open the sidebar -->
+<span class="openbtn" onclick="toggleNav()">&#9776;</span> <!-- Hamburger icon -->
+
 <div id="chart-container">
   <h5 id="h4style">INDEX GABUNGAN</h5>
   <h6 id="currentDate" style="margin-top: -10px;"></h6>
-  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(0, 211, 0);">Rp6.100 (+1,52%)</b>
+  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(255, 0, 0);">Rp6.060 (-0,66%)</b>
 
   <!--Canvas Grafik-->
   <canvas id="myChart" class="chart-container"></canvas>
@@ -49,15 +69,15 @@
   <p id="marketCountdown" style="border-color: whitesmoke; background-color: rgba(255, 255, 255, 0); margin-bottom: -10px; margin-top: -10px;"></p>
   
   <div style="text-align: left; margin-left: 30px;">
-    <p style="margin-bottom: -12px;">Open <span style="color: green;">6.100</span></p>
-    <p style="margin-bottom: -12px;">High <span style="color: black;">6.100</span></p>
-    <p style="margin-bottom: -12px;">Low <span style="color: red;">6.060</span></p>
+    <p style="margin-bottom: -12px;">Open <span style="color: green;">6.070</span></p>
+    <p style="margin-bottom: -12px;">High <span style="color: black;">6.110</span></p>
+    <p style="margin-bottom: -12px;">Low <span style="color: red;">6.050</span></p>
   </div>
   
   <div style="text-align: right; margin-right: 30px;">
-    <p style="margin-bottom: -12px; margin-top: -60px;">ARA <span style="color: green;">6.450</span></p>
-    <p style="margin-bottom: -12px;">ARB <span style="color: red;">4.570</span></p>
-    <p style="margin-bottom: -12px;">Analisis 61% Buy</p>
+    <p style="margin-bottom: -12px; margin-top: -60px;">ARA <span style="color: green;">6.420</span></p>
+    <p style="margin-bottom: -12px;">ARB <span style="color: red;">4.560</span></p>
+    <p style="margin-bottom: -12px;">Analisis 34% Buy</p>
   </div>
 
   <!-- Navigasi -->
@@ -68,9 +88,9 @@
     <a href="javascript:void(0)" id="financial-btn">LAPORAN KEUANGAN</a>
     <a href="javascript:void(0)" id="corpaction-btn">CORP ACTION</a>
     <a href="javascript:void(0)" id="holding-btn">TOP HOLDING</a>
+    <a href="javascript:void(0)" id="profil-btn">PROFIL</a>
   </div>
   
-
   <!-- Konten Halaman -->
   <div id="news-section" class="content-section">
     <h3>NEWS</h3>
@@ -96,7 +116,6 @@
 
   <!-- Bagian Laporan Keuangan -->
   <div id="financial-section" class="content-section" style="display:none;">
-    <h3>Laporan Keuangan</h3>
     <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">Agustus 2024</h5>
     <table style="font-size: 14px;">
       <tr>
@@ -153,11 +172,11 @@
     <p>Tidak ada aksi korporasi saat ini.</p>
   </div>
 
-
   <!-- Bagian isi keuntungan -->
   <div id="keuntungan-section" class="content-section" style="display:none;">
     <h3>LIHAT KEUNTUNGAN</h3>
     <p>Masukkan ID INVESTOR yang kamu miliki untuk melihat keuntungan</p>
+    <p>Keuntungan akan diperbarui setiap awal bulan</p>
     <div class="containerdatainvestor">
       <form id="dataForm">
           <label for="id_pelanggan">ID Investor:</label>
@@ -184,30 +203,98 @@
   <!-- Bagian Holding -->
 <div id="holding-section" class="content-section" style="display:none;">
   <h3>TOP HOLDING</h3>
+  <b style="text-decoration: underline;">SAHAM XENZA DIGITAL GROUP</b>
+  <p style="margin-bottom: -8px;">1. XTWR<span style="color: red;"> 5.300 -100(-2,64%)</span></p>
+  <p style="margin-bottom: -8px;">2. XDID<span style="color: red;"> 8.490 -20(-0,71%)</span></p>
+  <br>
   <b style="text-decoration: underline;">SAHAM BANK</b>
-  <p style="margin-bottom: -8px;">1. BBCA</p>
-  <p style="margin-bottom: -8px;">2. BMRI</p>
-  <p style="margin-bottom: -8px;">3. BNGA</p>
-  <p style="margin-bottom: -8px;">4. NISP</p>
-  <p style="margin-bottom: -8px;">5. BRIS</p>
-  <p style="margin-bottom: -8px;">6. BBTN</p>
-  <p style="margin-bottom: -8px;">7. BBRI</p>
-  <p style="margin-bottom: -8px;">8. BBNI</p>
+  <p style="margin-bottom: -8px;">1. BBCA<span style="color: green;"> 10.325 +100(+0,98%)</span></p>
+  <p style="margin-bottom: -8px;">2. BMRI<span style="color: green;"> 7.125 +25(+0,35%)</span></p>
+  <p style="margin-bottom: -8px;">3. BNGA<span style="color: green;"> 1.880 +5(+0,27%)</span></p>
+  <p style="margin-bottom: -8px;">4. NISP<span style="color: green;"> 10.325 +100(+0,98%)</span></p>
+  <p style="margin-bottom: -8px;">5. BRIS<span style="color: red;"> 2.650 -30(-1,12%)</span></p>
   <br>
   <b style="text-decoration: underline;">SAHAM TAMBANG</b>
-  <p style="margin-bottom: -8px;">1. ADRO </p>
-  <p style="margin-bottom: -8px;">2. ADMR</p>
-  <p style="margin-bottom: -8px;">3. PTBA</p>
-  <p style="margin-bottom: -8px;">4. BREN</p>
-  <p style="margin-bottom: -8px;">5. BRPT</p>
-  <p style="margin-bottom: -8px;">6. CUAN</p>
-  <p style="margin-bottom: -8px;">7. ELSA</p>
-  <br>
-  <b style="text-decoration: underline;">SAHAM PROPERTI</b>
-  <p style="margin-bottom: -8px;">1. PWON </p>
-  <p style="margin-bottom: -8px;">2. CTRA</p>
-  <p style="margin-bottom: -8px;">3. BSDE</p>
-  <p style="margin-bottom: -8px;">4. PANI</p>
+  <p style="margin-bottom: -8px;">1. ADRO<span style="color: green;"> 3.560 +40(+1,14%)</span></p>
+  <p style="margin-bottom: -8px;">2. ADMR<span style="color: red;"> 1.285 -20(-1,53%)</span></p>
+  <p style="margin-bottom: -8px;">3. PTBA<span style="color: red;"> 2.730 -50(-1,80%)</span></p>
+  <p style="margin-bottom: -8px;">4. ELSA<span style="color: green;"> 480 +6(+1,27%)</span></p>
+</div>
+
+<!-- Bagian Profil -->
+<div id="profil-section" class="content-section" style="display:none;">
+  <p style="font-size: 14px;">Xenza Invest adalah suatu tempat investasi bagi anak muda yang didirikan oleh Xenza Investama bagian dari Xenza Digital Group.</p>
+  <p style="font-size: 14px;">Dengan adanya Xenza Invest ini memudahkan anak muda maupun usia lanjut untuk menyimpan uangnya dengan sekaligus berinvestasi</p>
+  
+  <table style="font-size: 14px;">
+    <tr>
+        <td style="padding: 5px 0;">Nama</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Xenza Investama</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px 0;">Part of</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Xenza Digital Group</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px 0;">Sektor</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Finansial</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Broker</td>
+      <td style="padding: 5px 0; padding-left: 20px;">
+          XL-Stockbit Sekuritas <br>
+          CC-Mandiri Sekuritas  <br>
+          XC-Ajaib Sekuritas  <br>
+          PD-Indo Premier Sekuritas <br>
+          YP-Mirae Asset Sekuritas Indonesaia
+      </td>
+  </tr>
+  <tr>
+      <td style="padding: 5px 0;">Biaya Layanan</td>
+      <td style="padding: 5px 0; padding-left: 20px;">0,05% dari total transaksi</td>
+  </tr>
+  <tr>
+    <td style="padding: 5px 0;">Biaya Pembelian</td>
+    <td style="padding: 5px 0; padding-left: 20px;">0,0%</td>
+  </tr>
+  <tr>
+    <td style="padding: 5px 0;">Biaya Penjualan</td>
+    <td style="padding: 5px 0; padding-left: 20px;">0,0%</td>
+  </tr>
+  <tr>
+    <td style="padding: 5px 0;">Minimal Pembelian</td>
+    <td style="padding: 5px 0; padding-left: 20px;">Rp5.000</td>
+  </tr>
+  <tr>
+    <td style="padding: 5px 0;">Minimal Penjualan</td>
+    <td style="padding: 5px 0; padding-left: 20px;">Rp10.000</td>
+  </tr>
+  <tr>
+    <td style="padding: 5px 0;">Biaya Penarikan</td>
+    <td style="padding: 5px 0; padding-left: 20px;">
+      Rp3.000 jika Rp10.000-Rp500.000 <br>
+      Rp2.500 jika Rp500.001-Rp1.500.000  <br>
+      Rp1.000 jika Rp1.500.001-Rp10.000.000 <br>
+      Gratis jika >Rp10.000.000
+    </td>
+  </tr>
+  <tr>
+    <td style="padding: 5px 0;">Rekening Asal Penarikan</td>
+    <td style="padding: 5px 0; padding-left: 20px;">
+      BCA <br>
+      OCBC NISP <br>
+      MANDIRI <br>
+      BNI <br>
+      BRI <br>
+      CIMB NIAGA <span style="color: red; font-size: 11px;">under maintenance</span><br>
+      <span style="font-size: 11px; color: silver; font-weight: bold;">Biaya penarikan berlaku jika rekening tujuan berbeda dengan rekening asal</span>
+    </td>
+  </tr>
+</table>
+
+<p style="font-size: 14px;">Kami berkomitmen untuk membantu setiap orang yang ingin berinvestasi dipasar modal indonesia dan akan menjaga dan mengalokasikan
+  dana 100% pada sektor pasar modal
+</p>
 </div>
 
 </div>
@@ -224,6 +311,7 @@
 <script src="assets/source/script/navdwon.js"></script>
 <script src="assets/source/script/api.js"></script>
 <script src="assets/source/script/grafik.js"></script>
+<script src="assets/source/script/sidebar.js"></script>
 
 </body>
 </html>

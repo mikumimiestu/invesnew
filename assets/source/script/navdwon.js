@@ -32,6 +32,9 @@ function showSection(sectionId) {
   document.getElementById('holding-btn').addEventListener('click', function() {
     showSection('holding-section');
   });
+    document.getElementById('profil-btn').addEventListener('click', function() {
+    showSection('profil-section');
+  });
 
   // Tampilkan default section (News)
   showSection('news-section');

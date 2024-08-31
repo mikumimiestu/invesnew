@@ -325,3 +325,9 @@ body {
   height: 40px;
   border-radius: 56px;
 }
+
+@keyframes blinkingAnimation {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}

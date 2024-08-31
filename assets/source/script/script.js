@@ -89,3 +89,7 @@ document.querySelectorAll('#time-range-buttons button').forEach(button => {
     });
   });
 
+// JavaScript untuk mengalihkan halaman jika dibuka di desktop
+if (window.innerWidth >= 768) {
+    document.body.innerHTML = "<div style='text-align:center; padding:50px; font-size:1.5em; color:red;'>Halaman ini hanya dapat diakses melalui perangkat mobile.</div>";
+}

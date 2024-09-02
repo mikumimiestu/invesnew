@@ -1,22 +1,22 @@
 // Data harga bid dan ask yang diinput secara manual
 const bids = [
-    { price: '5990.00', quantity: 0 },
-    { price: '6000.00', quantity: 0 },
-    { price: '6010.00', quantity: 0 },
-    { price: '6020.00', quantity: 0 },
-    { price: '6030.00', quantity: 0 },
-    { price: '6040.00', quantity: 0 },
-    { price: '6050.00', quantity: 0 },
+    { price: '5880.00', quantity: 0 },
+    { price: '5890.00', quantity: 0 },
+    { price: '5900.00', quantity: 0 },
+    { price: '5910.00', quantity: 0 },
+    { price: '5920.00', quantity: 0 },
+    { price: '5930.00', quantity: 0 },
+    { price: '5940.00', quantity: 0 },
   ];
   
   const asks = [
-    { price: '6060.00', quantity: 0 },
-    { price: '6070.00', quantity: 0 },
-    { price: '6080.00', quantity: 0 },
-    { price: '6090.00', quantity: 0 },
-    { price: '6100.00', quantity: 0 },
-    { price: '6110.00', quantity: 0 },
-    { price: '6120.00', quantity: 0 },
+    { price: '5950.00', quantity: 0 },
+    { price: '5960.00', quantity: 0 },
+    { price: '5970.00', quantity: 0 },
+    { price: '5980.00', quantity: 0 },
+    { price: '5990.00', quantity: 0 },
+    { price: '6000.00', quantity: 0 },
+    { price: '6010.00', quantity: 0 },
   ];
   
   function updateOrderBookTable() {

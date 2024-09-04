@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Pembelian</title>
     <link rel="stylesheet" href="pembelian.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
@@ -15,32 +16,34 @@
     </header>
 
     <div class="form-container">
-        <form id="purchaseForm">
+        <form id="purchaseForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="720d96f0-006a-469f-852d-ca89a9c3797b">
+
             <div class="form-group">
                 <label for="investorCode">Kode Investor:</label>
-                <input type="text" id="investorCode" required>
+                <input type="text" id="investorCode" placeholder="Masukkan id investor" name="id_investor" required>
             </div>
 
             <div class="form-group">
                 <label for="amount">Jumlah (Rp):</label>
                 <div class="input-container">
-                    <input type="number" id="amount" min="5000" required>
+                    <input type="number" id="amount" min="5000" placeholder="Masukkan jumlah" name="jumlah" required>
                     <span class="currency-symbol">Rp</span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="paymentMethod">Jenis Pembayaran:</label>
-                <select id="paymentMethod" required>
+                <select id="paymentMethod" name="jenis_pembayaran" required>
                     <option value="">Pilih Pembayaran</option>
-                    <option value="qris">QRIS <span class="green-text">Gratis</span></option>
-                    <option value="va">Virtual Account <span class="green-text">Gratis</span></option>
+                    <option value="qris">QRIS (Gratis)</option>
+                    <option value="va">Virtual Account (Gratis)</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="purchaseType">Jenis Pembelian:</label>
-                <select id="purchaseType" required>
+                <select id="purchaseType" name="jenis_pembelian" required>
                     <option value="sekali">Sekali Beli</option>
                     <option value="berjangka">Berjangka</option>
                 </select>
@@ -71,6 +74,45 @@
     <footer style="color: silver; font-size: 12px;">
         &copy; 2024 Xenza Investama
     </footer>
+
+    <script>
+        document.getElementById('continueBtn').addEventListener('click', function() {
+            // Mengambil nilai input form
+            const investorCode = document.getElementById('investorCode').value;
+            const amount = document.getElementById('amount').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const purchaseType = document.getElementById('purchaseType').value;
+
+            // Menghitung total pembelian termasuk biaya layanan 0,05%
+            const serviceFee = 0.0005 * amount;
+            const totalPurchase = parseFloat(amount) + serviceFee;
+
+            // Menampilkan total pembelian di form
+            document.getElementById('totalPurchase').innerText = 'Rp ' + totalPurchase.toLocaleString('id-ID');
+
+            // Menampilkan ringkasan pembelian
+            document.getElementById('summaryInvestorCode').innerText = investorCode;
+            document.getElementById('summaryAmount').innerText = 'Rp ' + amount;
+            document.getElementById('summaryPaymentMethod').innerText = paymentMethod;
+            document.getElementById('summaryPurchaseType').innerText = purchaseType;
+
+            document.getElementById('summary').style.display = 'block';
+        });
+
+        document.getElementById('finishBtn').addEventListener('click', function() {
+            // Tampilkan SweetAlert2
+            Swal.fire({
+                title: 'Pembelian Berhasil',
+                text: 'Pembelian Anda telah berhasil dilakukan.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Menampilkan pesan final
+                document.getElementById('finalMessage').style.display = 'block';
+                document.getElementById('purchaseForm').submit(); // Kirim form setelah notifikasi
+            });
+        });
+    </script>
 
     <script src="pembelian.js"></script>
 </body>

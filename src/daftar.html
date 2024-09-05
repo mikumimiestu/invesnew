@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Pendaftaran</title>
+    <link rel="stylesheet" href="pembelian.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <a href="/index.html" class="back-icon">
+            <img src="../assets/public/img/left-arrow.png" alt="Kembali" />
+        </a>        
+        <h1>Halaman Pendaftaran</h1>
+    </header>
+
+    <div class="form-container">
+        <form id="registrationForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="720d96f0-006a-469f-852d-ca89a9c3797b">
+
+            <div class="form-group">
+                <label for="email">Email (@gmail.com):</label>
+                <input type="email" id="email" placeholder="Masukkan email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" title="Email harus menggunakan domain @gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">No HP (terhubung dengan WhatsApp):</label>
+                <input type="tel" id="phone" placeholder="Masukkan no HP" name="nohp" required pattern="^(\+62|62|0)8[1-9][0-9]{6,9}$" title="Masukkan nomor HP yang valid">
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Nama Panjang:</label>
+                <input type="text" id="fullName" placeholder="Masukkan nama panjang" name="nama_panjang" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nickname">Nama Panggilan:</label>
+                <input type="text" id="nickname" placeholder="Masukkan nama panggilan" name="nama_panggilan" required>
+            </div>
+
+            <div class="form-group">
+                <label for="birthdate">Tanggal Lahir:</label>
+                <input type="date" id="birthdate" name="tanggal_lahir" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Alamat:</label>
+                <textarea id="address" placeholder="Masukkan alamat" name="alamat" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="accountNumber">Nomor Rekening:</label>
+                <input type="text" id="accountNumber" placeholder="Masukkan no rekening" name="no_rekening" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bank">Pilih Bank:</label>
+                <select id="bank" name="bank" required>
+                    <option value="">Pilih Bank</option>
+                    <option value="bca">Bank Central Asia (BCA)</option>
+                    <option value="bri">Bank Rakyat Indonesia (BRI)</option>
+                    <option value="bni">Bank Negara Indonesia (BNI)</option>
+                    <option value="mandiri">Bank Mandiri</option>
+                    <option value="btn">Bank Tabungan Negara (BTN)</option>
+                    <option value="danamon">Bank Danamon</option>
+                    <option value="cimb">CIMB Niaga</option>
+                    <option value="permata">Bank Permata</option>
+                    <option value="ocbc">OCBC NISP</option>
+                    <option value="maybank">Maybank Indonesia</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="accountName">Nama pada Rekening:</label>
+                <input type="text" id="accountName" placeholder="Masukkan nama pada rekening" name="nama_rekening" required>
+            </div>
+
+            <div class="form-group">
+                <label for="purpose">Tujuan Pendaftaran:</label>
+                <select id="purpose" name="tujuan_pendaftaran" required>
+                    <option value="">Pilih Tujuan</option>
+                    <option value="investasi">Investasi</option>
+                    <option value="tabungan">Tabungan</option>
+                    <option value="pendapatan">Pendapatan</option>
+                    <option value="pensiun">Pensiun</option>
+                </select>
+            </div>
+
+            <button type="submit" id="registerBtn">Daftar</button>
+        </form>
+
+        <div id="finalMessage" style="display:none;">
+            <p>Pendaftaran Anda berhasil! Kami akan segera menghubungi Anda.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const today = new Date();
+            const age = today.getFullYear() - birthdate.getFullYear();
+            const monthDifference = today.getMonth() - birthdate.getMonth();
+
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+
+            if (age < 17) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Usia Tidak Valid',
+                    text: 'Usia Anda harus minimal 17 tahun untuk mendaftar.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Pendaftaran Berhasil',
+                    text: 'Pendaftaran Anda telah berhasil dilakukan.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    document.getElementById('finalMessage').style.display = 'block';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

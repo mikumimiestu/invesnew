@@ -9,14 +9,6 @@ function showSection(sectionId) {
   }
 
   // Event listeners untuk tombol navigasi
-  document.getElementById('news-btn').addEventListener('click', function() {
-    showSection('news-section');
-  });
-
-  document.getElementById('orderbook-btn').addEventListener('click', function() {
-    showSection('orderbook-section');
-  });
-
   document.getElementById('financial-btn').addEventListener('click', function() {
     showSection('financial-section');
   });
@@ -37,11 +29,11 @@ function showSection(sectionId) {
   });
 
   // Tampilkan default section (News)
-  showSection('news-section');
+  showSection('corpaction-section');
 
   document.addEventListener("DOMContentLoaded", function() {
     // Set default active tab (News)
-    const defaultActiveTab = document.getElementById("news-btn");
+    const defaultActiveTab = document.getElementById("corpaction-btn");
     defaultActiveTab.classList.add("active");
   
     // Handle click events on navigation buttons

@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-This website supports secuiry
+This website supports security
 
 | Version | Supported          |
 | ------- | ------------------ |

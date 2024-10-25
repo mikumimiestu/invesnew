@@ -1,11 +1,33 @@
-document.addEventListener('DOMContentLoaded', fetchMessages);
-document.getElementById('send-btn').addEventListener('click', sendMessage);
+document.addEventListener('DOMContentLoaded', () => {
+    fetchMessages(); // Ambil pesan saat pertama kali dimuat
+    setInterval(fetchMessages, 1000); // Polling setiap 5 detik untuk memperbarui pesan
+});
+
+document.getElementById('send-btn')?.addEventListener('click', sendMessage);
+
+let lastTimestamp = '';
 
 function fetchMessages() {
     fetch('https://script.google.com/macros/s/AKfycbxmPhNNFwXt-OrOAy22QqaFH5dAZOHiBRX6FQUzoqjStAyPOFAxEpRr-B0QeW-i_5h4/exec')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            data.forEach(msg => {
+            // Sort data berdasarkan timestamp jika belum disortir
+            data.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+            const newMessages = data.filter(msg => msg.timestamp > lastTimestamp);
+
+            // Update lastTimestamp jika ada pesan baru
+            if (newMessages.length > 0) {
+                lastTimestamp = newMessages[newMessages.length - 1].timestamp;
+            }
+
+            // Tampilkan pesan baru
+            newMessages.forEach(msg => {
                 displayMessage(msg.userId, msg.message);
             });
         })
@@ -15,10 +37,10 @@ function fetchMessages() {
 }
 
 function sendMessage() {
-    const userId = document.getElementById('user-id').value.trim();
-    const message = document.getElementById('message-input').value.trim();
+    const userId = document.getElementById('user-id')?.value.trim();
+    const message = document.getElementById('message-input')?.value.trim();
 
-    if (userId === '' || message === '') {
+    if (!userId || !message) {
         alert('User ID dan pesan harus diisi!');
         return;
     }
@@ -41,9 +63,12 @@ function sendMessage() {
         },
         mode: 'no-cors'
     })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        .then(() => {
+            console.log('Pesan berhasil dikirim.');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 
     // Kosongkan input pesan setelah dikirim
     document.getElementById('message-input').value = '';
@@ -51,9 +76,17 @@ function sendMessage() {
 
 function displayMessage(userId, message) {
     const chatBox = document.getElementById('chat-box');
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('border', 'rounded', 'p-2', 'mb-2', 'bg-light');
-    messageElement.textContent = `${userId}: ${message}`;
-    chatBox.appendChild(messageElement);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    if (!chatBox) return; // Pastikan chat box ada sebelum menampilkan pesan
+
+    // Cek jika pesan sudah ada di dalam chat box untuk menghindari duplikat
+    const existingMessages = Array.from(chatBox.children).map(msg => msg.textContent);
+    const newMessageContent = `${userId}: ${message}`;
+
+    if (!existingMessages.includes(newMessageContent)) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('border', 'rounded', 'p-2', 'mb-2', 'bg-light');
+        messageElement.textContent = newMessageContent;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll ke bawah untuk pesan terbaru
+    }
 }

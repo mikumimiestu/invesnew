@@ -1,6 +1,6 @@
-document.getElementById('dataForm').addEventListener('submit', function(event) {
+document.getElementById('dataForm').addEventListener('submit', function (event) {
     event.preventDefault();
-    
+
     const idPelanggan = document.getElementById('id_pelanggan').value;
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxf6mHgxyvTV9FrADYQKAovF3MaymRxsI3ru2xRCuTZsZwErOo0lmYLbmFAgkIVl6vF9A/exec';  // Pastikan URL ini benar
 
@@ -8,7 +8,7 @@ document.getElementById('dataForm').addEventListener('submit', function(event) {
     document.getElementById('result').style.display = 'none';
     document.getElementById('progressBarContainer').style.display = 'block';
     updateProgressBar(0);
-    
+
     fetch(`${scriptURL}?idPelanggan=${encodeURIComponent(idPelanggan)}`)
         .then(response => response.json())
         .then(data => {
@@ -42,15 +42,17 @@ function updateProgressBar(percent) {
 }
 
 function formatRupiah(angka) {
-    const numberString = angka.toString();
+    const isNegative = angka < 0; // Cek apakah angka negatif
+    const numberString = Math.abs(angka).toString(); // Ambil nilai absolut dari angka
     const sisa = numberString.length % 3;
     let rupiah = numberString.substr(0, sisa);
     const ribuan = numberString.substr(sisa).match(/\d{3}/g);
-    
+
     if (ribuan) {
         const separator = sisa ? '.' : '';
         rupiah += separator + ribuan.join('.');
     }
-    
-    return 'Rp' + rupiah;
+
+    // Jika angka negatif, tambahkan tanda minus
+    return (isNegative ? 'Rp -' : 'Rp ') + rupiah;
 }

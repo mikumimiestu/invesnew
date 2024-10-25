@@ -13,6 +13,10 @@ function showSection(sectionId) {
     showSection('financial-section');
   });
 
+  document.getElementById('chat-btn').addEventListener('click', function() {
+    showSection('chat-section');
+  });
+
   document.getElementById('corpaction-btn').addEventListener('click', function() {
     showSection('corpaction-section');
   });

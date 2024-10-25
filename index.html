@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="assets/styles/keuntungan.css">
   <link rel="stylesheet" href="assets/styles/sidebar.css">
   <link rel="stylesheet" href="assets/styles/warning.css">
+  <!-- Link ke Tailwind CSS -->
+  <!-- <link href="assets/styles/output.css" rel="stylesheet"> -->
+
+  <!-- Link ke Bootstrap CSS
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
 <body>
 <header>
@@ -34,7 +39,7 @@
 <div id="chart-container">
   <h5 id="h4style">INDEX GABUNGAN</h5>
   <h6 id="currentDate" style="margin-top: -10px;"></h6>
-  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(255, 0, 0);">Rp5.780 -120(-2,03%)</b>
+  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(255, 0, 0);">Rp5.700 -80(-1,38%)</b>
 
   <!--Canvas Grafik-->
   <canvas id="myChart" class="chart-container"></canvas>
@@ -78,10 +83,18 @@
   <!-- Navigasi -->
   <div class="nav-container">
     <a href="javascript:void(0)" id="keuntungan-btn">KEUNTUNGAN</a>
+    <a href="javascript:void(0)" id="chat-btn">FEED</a>
     <a href="javascript:void(0)" id="corpaction-btn">CORP ACTION</a>
     <a href="javascript:void(0)" id="financial-btn">LAPORAN</a>
     <a href="javascript:void(0)" id="holding-btn">TOP HOLDING</a>
     <a href="javascript:void(0)" id="profil-btn">PROFIL</a>
+  </div>
+
+  <div id="chat-section" class="content-section" style="display:none;">
+    <p>Untuk mengakases chat komunitas silahkan tekan tombol dibawah ini untuk mengarahkan ke halaman chat komuniats</p>
+    <a href="chat/chat.html">
+      <button>Kirim</button>
+    </a>
   </div>
 
   <!-- Bagian Laporan Keuangan -->
@@ -484,6 +497,13 @@
 <script src="assets/source/script/api.js"></script>
 <script src="assets/source/script/grafik.js"></script>
 <script src="assets/source/script/sidebar.js"></script>
+<!-- Link ke Bootstrap JS dan dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Tambahkan script.js di bawah ini -->
+<script src="assets/source/script/chat.js"></script>
 
 </body>
 </html>

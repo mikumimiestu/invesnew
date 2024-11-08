@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Laporan Masalah</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <a href="../index.html" class="btn btn-light mb-3">
+            </a>
+            <h1>Halaman Laporan Masalah</h1>
+        </header>
+
+        <div class="card p-4">
+            <form id="issueForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="720d96f0-006a-469f-852d-ca89a9c3797b">
+
+                <div class="form-group">
+                    <label for="investorCode">Kode Investor:</label>
+                    <input type="text" id="investorCode" class="form-control" placeholder="Masukkan id investor" name="id_investor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" class="form-control" placeholder="Masukkan email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Nomor HP:</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Masukkan nomor HP" name="no_hp" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="issue">Keluhan:</label>
+                    <textarea id="issue" class="form-control" placeholder="Deskripsikan keluhan Anda" name="keluhan" rows="4" required></textarea>
+                </div>
+
+                <button type="button" id="submitBtn" class="btn btn-primary btn-block">Kirim Laporan</button>
+            </form>
+
+            <div id="finalMessage" class="alert alert-success mt-4" style="display:none;">
+                <p>Keluhan Anda telah diterima dan akan diproses secepatnya.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-muted mt-4" style="font-size: 12px;">
+        &copy; 2024 Xenza Investama
+    </footer>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const investorCode = document.getElementById('investorCode').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const issue = document.getElementById('issue').value;
+
+            if (!investorCode || !email || !phone || !issue) {
+                Swal.fire({
+                    title: 'Input Tidak Lengkap',
+                    text: 'Semua kolom wajib diisi.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Konfirmasi Laporan',
+                html: `
+                    <p><strong>Kode Investor:</strong> ${investorCode}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Nomor HP:</strong> ${phone}</p>
+                    <p><strong>Keluhan:</strong> ${issue}</p>
+                `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Kirim',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Laporan Berhasil Dikirim',
+                        text: 'Keluhan Anda telah berhasil dikirim.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        document.getElementById('finalMessage').style.display = 'block';
+                        document.getElementById('issueForm').submit();
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

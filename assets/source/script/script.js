@@ -18,7 +18,7 @@ function updateMarketStatus() {
         // Check if the current time is before market close
         if (today >= marketOpenTime && today < marketCloseTime) {
             marketStatusElement.textContent = 'Market Open';
-            marketStatus.innerHTML = 'Market Open <span class="silver-text bold-text">[Normal]</span>';
+            marketStatus.innerHTML = 'Market Open <span class="silver-text bold-text">[Miantenance 3 Day]</span>';
             marketStatusElement.classList.add('open');
             marketStatusElement.classList.remove('closed');
             marketCountdownElement.textContent = ''; // Clear countdown
@@ -42,7 +42,7 @@ function updateMarketStatus() {
             const minutes = Math.floor((secondsUntilOpen % 3600) / 60);
             const seconds = secondsUntilOpen % 60;
 
-            marketStatusElement.textContent = 'Market Closed';
+            marketStatusElement.textContent = 'Market Closed [Miantenance 3 Day]';
             marketStatusElement.classList.add('closed');
             marketStatusElement.classList.remove('open');
 

@@ -88,11 +88,11 @@
 
     <!-- Navigasi -->
     <div class="nav-container">
+      <a href="javascript:void(0)" id="holding-btn">HOLDING</a>
       <a href="javascript:void(0)" id="keuntungan-btn">KEUNTUNGAN</a>
       <a href="javascript:void(0)" id="chat-btn">e-IPO</a>
       <a href="javascript:void(0)" id="corpaction-btn">CORP ACTION</a>
       <a href="javascript:void(0)" id="financial-btn">LAPORAN</a>
-      <a href="javascript:void(0)" id="holding-btn">TOP HOLDING</a>
       <a href="javascript:void(0)" id="profil-btn">PROFIL</a>
     </div>
 
@@ -127,7 +127,7 @@
     </table>
 
     <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
-      style="color: blue;">e-IPO</span> MDYI <span style="color: green; border: 1px solid green; border-radius: 5px; padding: 1px 2px;">SYARIAH</span> (Daya Intiguna Yasa Tbk)</h5>
+      style="color: blue;">e-IPO</span> MDIY <span style="color: green; border: 1px solid green; border-radius: 5px; padding: 1px 2px;">SYARIAH</span> (Daya Intiguna Yasa Tbk)</h5>
   <table style="font-size: 14px;">
     <tr>
       <td style="padding: 5px 0;">Penawaran Awal</td>
@@ -595,19 +595,124 @@
     </div>
 
     <!-- Bagian Holding -->
-    <div id="holding-section" class="content-section" style="display:none;">
-      <p>Saat ini real-time Top Holding mengalami masalah, kami akan berusaha untuk memperbaikinya</p>
-      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">Saham Xenza Digital Group
-      </h5>
-      <p style="margin-bottom: -8px; font-size: 12px;">1. XTWR<span style="color: red;"> 5.110 -90(-1,97%)</span></p>
-      <p style="margin-bottom: -8px; font-size: 12px;">2. XDID<span style="color: green;"> 8.550 -170(+4,27%)</span></p>
-      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">SRI KEHATI
-        <span style="color: red;">-2,00%</span>
-      </h5>
-      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">IDX30
-        <span style="color: red;">-2,18</span>
-      </h5>
-    </div>
+<div id="holding-section" class="content-section" style="display:none;">
+  <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px;">TRANSAKSI TERAKHIR  </h5>
+  <div style="border: 1px solid black; border-radius: 10px; padding: 5px; margin-bottom: -15px;">
+    <p style="font-size: 10px; font-weight: 600; color: red;">• SELL • ADRO (Alamtri Resources Indonesia Tbk.)</p>
+    <p style="font-size: 10px; font-weight: 600;">• BUY-IPO • AADI (Adaro Andalan Indonesia Tbk.)</p>
+    <p style="font-size: 10px; font-weight: 600;">• BUY-IPO • MDIY (Daya Intiguna Yasa Tbk.)</p>
+  </div>
+  
+  <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px;">SAHAM</h5>
+  <table style="font-size: 14px; width: 100%; border-collapse: collapse;">
+    <!-- Header Kolom -->
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 5px;">Kode</th>
+        <th style="text-align: left; padding: 5px;">Produk</th>
+        <th style="text-align: left; padding: 5px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 5px;">BBCA</td>
+        <td style="padding: 5px;">Bank Central Asia Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td> <!-- Segitiga up hijau -->
+      </tr>
+      <tr>
+        <td style="padding: 5px;">BMRI</td>
+        <td style="padding: 5px;">Bank Mandiri Persero Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">NISP</td>
+        <td style="padding: 5px;">Bank OCBC NISP Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">ASII</td>
+        <td style="padding: 5px;">Astra International Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">ELSA</td>
+        <td style="padding: 5px;">Elnusa Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">PTBA</td>
+        <td style="padding: 5px;">Bukit Asam Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">BRIS</td>
+        <td style="padding: 5px;">Bank Syariah Indonesia Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">ADRO</td>
+        <td style="padding: 5px;">Alamtri Resources Indonesia Tbk.</td>
+        <td style="padding: 5px; color: red;">&#9660; 7</td> <!-- Segitiga down merah -->
+      </tr>
+      <tr>
+        <td style="padding: 5px;">MYOR</td>
+        <td style="padding: 5px;">Mayora Indah Tbk.</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">AADI</td>
+        <td style="padding: 5px;">Adaro Andalan Indonesia Tbk.</td>
+        <td style="padding: 5px;">= IPO</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">MDIY</td>
+        <td style="padding: 5px;">Daya Intiguna Yasa Tbk.</td>
+        <td style="padding: 5px;">= IPO</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px; margin-top: 5px;">REKSADANA</h5>
+  <table style="font-size: 14px; width: 100%; border-collapse: collapse;">
+    <!-- Header Kolom -->
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 5px;">Jenis</th>
+        <th style="text-align: left; padding: 5px;">Produk</th>
+        <th style="text-align: left; padding: 5px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 5px;">Saham</td>
+        <td style="padding: 5px;">Grow SRI KEHATI Kelas O</td>
+        <td style="padding: 5px;;">=</td> <!-- Segitiga up hijau -->
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Pasar Uang</td>
+        <td style="padding: 5px;">BRI Seruni Pasar Uang III</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Pasar Uang</td>
+        <td style="padding: 5px;">Majoris Pasar Uang Syariah Indonesia</td>
+        <td style="padding: 5px; color: red;">&#9660; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Saham</td>
+        <td style="padding: 5px;">BNP Paribas SRI KEHATI</td>
+        <td style="padding: 5px; color: red;">&#9660; 2</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Obligas</td>
+        <td style="padding: 5px;">Manulife Obligasi Negara Indonesia II Kelas A</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
 
     <!-- Bagian Profil -->
     <div id="profil-section" class="content-section" style="display:none;">

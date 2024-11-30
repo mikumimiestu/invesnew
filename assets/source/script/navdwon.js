@@ -33,11 +33,11 @@ function showSection(sectionId) {
   });
 
   // Tampilkan default section (News)
-  showSection('corpaction-section');
+  showSection('holding-section');
 
   document.addEventListener("DOMContentLoaded", function() {
     // Set default active tab (News)
-    const defaultActiveTab = document.getElementById("corpaction-btn");
+    const defaultActiveTab = document.getElementById("holding-btn");
     defaultActiveTab.classList.add("active");
   
     // Handle click events on navigation buttons

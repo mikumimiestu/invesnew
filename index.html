@@ -1,40 +1,888 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Halaman Sedang Dalam Pengembangan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi Market</title>
+  <link rel="stylesheet" href="assets/styles/styles.css">
+  <link rel="stylesheet" href="assets/styles/keuntungan.css">
+  <link rel="stylesheet" href="assets/styles/sidebar.css">
+  <link rel="stylesheet" href="assets/styles/warning.css">
+  <!-- Link ke Tailwind CSS -->
+  <!-- <link href="assets/styles/output.css" rel="stylesheet"> -->
+
+  <!-- Link ke Bootstrap CSS
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
-<style>
-  body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
 
-.container {
-    text-align: center;
-}
-
-h1 {
-    color: #333;
-}
-
-p {
-    color: #555;
-}
-</style>
 <body>
-    <div class="container">
-        <h1>404 - Not Found</h1>
-        <p>Mohon maaf, halaman ini sedang dalam tahap pengembangan. Kami akan segera kembali!</p>
-        <p style="font-size: 12px; color: gray;">Tech Nova Group</p>
+  <header>
+    <span></span>
+    <a href="#logo">
+      <img src="assets/public/img/IMG_7347.PNG" alt="Logo">
+    </a>
+  </header>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="src/pembelian.html">| Pembelian</a>
+    <a href="src/penjualan.html">| Penjualan</a>
+    <a href="it/history.html">| Riwayat Pembelian</a>
+    <a href="src/laporan.html">| Lapor Masalah</a>
+    <a href="src/daftar.html">| Daftar investasi</a>
+    <a href="Login/login.html">Login</a>
+    <p class="copyright">&copy; 2024 Tech Nova Group. All rights reserved.</p>
+  </div>
+
+  <!-- Button to open the sidebar -->
+  <span class="openbtn" onclick="toggleNav()">&#9776;</span> <!-- Hamburger icon -->
+
+  <div id="chart-container">
+    <h5 id="h4style">INDEX GABUNGAN</h5>
+    <h6 id="currentDate" style="margin-top: -10px;"></h6>
+    <p style="margin-top: -20px; font-size: 10px; color: rgb(104, 104, 104); font-weight: 400;">Last update 23 Dec 2024 | 07:35 PM</p>
+    <b style="margin-bottom: 20px; margin-top: -5px; color: rgb(255, 0, 0);">Rp6.110 +600(-3,32%)</b>
+
+    <!--Canvas Grafik-->
+    <canvas id="myChart" class="chart-container"></canvas>
+    <!--Canvas Grafik-->
+
+
+    <!-- Tombol share dengan ikon -->
+    <button id="share-button2">
+      <img src="assets/public/img/LOGO.png" alt="Share Icon" width="30" height="30">
+    </button>
+
+    <!-- Tombol share dengan ikon -->
+    <button id="share-button">
+      <img src="assets/public/img/share (1).png" alt="Share Icon" width="30" height="30">
+    </button>
+
+    <div id="time-range-buttons">
+      <button data-time-range="1d" onclick="updateChart('1d', this)">1D</button>
+      <button data-time-range="1w" onclick="updateChart('1w', this)">1W</button>
+      <button data-time-range="1m" onclick="updateChart('1m', this)">1M</button>
+      <button data-time-range="ytd" onclick="updateChart('ytd', this)">YTD</button>
+      <button data-time-range="1y" onclick="updateChart('1y', this)">1Y</button>
+      <button data-time-range="3y" onclick="updateChart('3y', this)">3Y</button>
     </div>
+
+    <p id="marketStatus">Market Open</p>
+    <p id="marketCountdown"
+      style="border-color: whitesmoke; background-color: rgba(255, 255, 255, 0); margin-bottom: -10px; margin-top: -10px;">
+    </p>
+
+    <div style="text-align: left; margin-left: 30px;">
+      <p style="margin-bottom: -12px;">Open <span style="color: green;">6.470</span></p>
+      <p style="margin-bottom: -12px;">High <span style="color: black;">6.470</span></p>
+      <p style="margin-bottom: -12px;">Low <span style="color: red;">6.470</span></p>
+    </div>
+
+    <div style="text-align: right; margin-right: 30px;">
+      <p style="margin-bottom: -12px; margin-top: -60px;">ARA <span style="color: green;">6.470</span></p>
+      <p style="margin-bottom: -12px;">ARB <span style="color: red;">5.920</span></p>
+      <p style="margin-bottom: -12px;">Analisis 100% Buy</p>
+    </div>
+
+    <!-- Navigasi -->
+    <div class="nav-container">
+      <a href="javascript:void(0)" id="holding-btn">HOLDING</a>
+      <a href="javascript:void(0)" id="keuntungan-btn">KEUNTUNGAN</a>
+      <a href="javascript:void(0)" id="chat-btn">e-IPO</a>
+      <a href="javascript:void(0)" id="corpaction-btn">CORP ACTION</a>
+      <a href="javascript:void(0)" id="financial-btn">LAPORAN</a>
+      <a href="javascript:void(0)" id="profil-btn">PROFIL</a>
+    </div>
+
+    <!-- bagian e-IPO -->
+    <div id="chat-section" class="content-section" style="display:none;">
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        <span style="color: blue;">e-IPO</span> OBAT (Brigit Biofarmaka Teknologi Tbk) 
+    </h5>
+    <table style="font-size: 14px;">
+      <tr>
+        <td style="padding: 5px 0;">Penawaran Awal</td>
+        <td style="padding: 5px 0; padding-left: 20px;"></td>Rp330 - Rp350</td>
+        <td style="padding: 5px 0; padding-left: 20px;">18 Dec - 23 Dec</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Penawaran Umum</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp-</td>
+        <td style="padding: 5px 0; padding-left: 20px;">07 Jan 2025</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Penjatahan Efek</td>
+        <td style="padding: 5px 0; padding-left: 20px;">07 Jan 2025</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Distribusi Saham</td>
+        <td style="padding: 5px 0; padding-left: 20px;">08 Jan 2025</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">IPO</td>
+        <td style="padding: 5px 0; padding-left: 20px;">09 Jan 2025</td>
+      </tr>
+    </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        <span style="color: blue;">e-IPO</span> DGWG (Delta Giri Wacana Tbk) 
+    </h5>
+    <table style="font-size: 14px;">
+      <tr>
+        <td style="padding: 5px 0;">Penawaran Awal</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp420 - Rp620</td>
+        <td style="padding: 5px 0; padding-left: 20px;">02 Dec - 16 Dec</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Penawaran Umum</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp-</td>
+        <td style="padding: 5px 0; padding-left: 20px;">02 Jan - 08 Jan</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Penjatahan Efek</td>
+        <td style="padding: 5px 0; padding-left: 20px;">08 Jan 2025</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Distribusi Saham</td>
+        <td style="padding: 5px 0; padding-left: 20px;">09 Jan 2025</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">IPO</td>
+        <td style="padding: 5px 0; padding-left: 20px;">10 Jan 2025</td>
+      </tr>
+    </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        <span style="color: blue;">e-IPO</span> AADI <span style="color: green; border: 1px solid green; border-radius: 5px; padding: 1px 2px;">SYARIAH</span> (Adaro Andalan Indonesia Tbk) 
+    </h5>
+    <table style="font-size: 14px;">
+      <tr>
+        <td style="padding: 5px 0;">Penawaran Awal</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp4590 - Rp5900</td>
+        <td style="padding: 5px 0; padding-left: 20px;">12 Nov - 18 Nov</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Penawaran Umum</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp5550</td>
+        <td style="padding: 5px 0; padding-left: 20px;">29 Nov - 03 Dec</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Penjatahan Efek</td>
+        <td style="padding: 5px 0; padding-left: 20px;">03 Dec 2024</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Distribusi Saham</td>
+        <td style="padding: 5px 0; padding-left: 20px;">04 Dec 2024</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">IPO</td>
+        <td style="padding: 5px 0; padding-left: 20px;">05 Dec 2024</td>
+      </tr>
+    </table>
+
+    <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+      style="color: blue;">e-IPO</span> MDIY <span style="color: green; border: 1px solid green; border-radius: 5px; padding: 1px 2px;">SYARIAH</span> (Daya Intiguna Yasa Tbk)</h5>
+  <table style="font-size: 14px;">
+    <tr>
+      <td style="padding: 5px 0;">Penawaran Awal</td>
+      <td style="padding: 5px 0; padding-left: 20px;">Rp1650 - Rp1870</td>
+      <td style="padding: 5px 0; padding-left: 20px;">25 Nov - 03 Dec</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Penawaran Umum</td>
+      <td style="padding: 5px 0; padding-left: 20px;">Rp-</td>
+      <td style="padding: 5px 0; padding-left: 20px;">13 Dec - 17 Dec</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Penjatahan Efek</td>
+      <td style="padding: 5px 0; padding-left: 20px;">17 Dec 2024</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Distribusi Saham</td>
+      <td style="padding: 5px 0; padding-left: 20px;">18 Dec 2024</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">IPO</td>
+      <td style="padding: 5px 0; padding-left: 20px;">19 Dec 2024</td>
+    </tr>
+  </table>
+
+    </div>
+
+    <!-- Bagian Laporan Keuangan -->
+    <div id="financial-section" class="content-section" style="display:none;">
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        <span style="animation: blinkingAnimation 1s infinite;"><span style="color: green;">🟢</span></span>
+        </span>
+        Desember 2024
+      </h5>
+      <p style="font-size: 12px; font-weight: bold; color: green;">Ongoing</p>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Laba bersih</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+67,05%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total profit</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+2,69%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+87,71%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total bunga kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+3,00% (tetap)
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kredit</td>
+          <td style="padding: 5px 0; padding-left: 20px;"> <span style="color: red;">+11,01%</span></td>
+        </tr>
+      </table>
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        November 2024
+      </h5>
+      <p style="font-size: 12px; font-weight: bold; color: green;">New!</p>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Laba bersih</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+7,00%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total profit</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+2,76%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+51,78%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total bunga kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+3,00% (tetap)
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kredit</td>
+          <td style="padding: 5px 0; padding-left: 20px;"> <span style="color: red;">+12,01%</span></td>
+        </tr>
+      </table>
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        Oktober 2024
+      </h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Laba bersih</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+8,54%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total profit</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+0,87%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+19,04%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total bunga kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+4,70%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kredit</td>
+          <td style="padding: 5px 0; padding-left: 20px;"> <span style="color: red;">+3,76%</span></td>
+        </tr>
+      </table>
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">
+        <span><span style="color: green;"></span></span>
+        </span>
+        September 2024
+      </h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Laba bersih</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+0,56%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total profit</td>
+          <td style="padding: 5px 0; padding-left: 20px;">-3,41%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+10,11%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total bunga kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+4,70%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kredit</td>
+          <td style="padding: 5px 0; padding-left: 20px;"><span style="color: red;">+7,84%</span></td>
+        </tr>
+      </table>
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">Agustus 2024</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Laba bersih</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+2,45%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total profit</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+7,21%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+1,09%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total bunga kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+4,50%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kredit</td>
+          <td style="padding: 5px 0; padding-left: 20px;"><span style="color: green;">-0,71%</span></td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;">Juli 2024</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Laba bersih</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+4,63%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total profit</td>
+          <td style="padding: 5px 0; padding-left: 20px;">-1,02%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+5,56%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total bunga kas</td>
+          <td style="padding: 5px 0; padding-left: 20px;">+4,20%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Total kredit</td>
+          <td style="padding: 5px 0; padding-left: 20px;"><span style="color: red;">+1,00%</span></td>
+        </tr>
+      </table>
+
+    </div>
+
+    <!-- Bagian Corp Action -->
+    <div id="corpaction-section" class="content-section" style="display:none;">
+      
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+        style="color: blueviolet;">DIVIDEND</span> ADRO (Alamtri Resources Indonesia Tbk.)</h5>
+    <table style="font-size: 14px;">
+      <tr>
+        <td style="padding: 5px 0;">Dividend</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp 1359</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Cum Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">26 Nov 2024</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Ex Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">28 Nov 2024</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Recording Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">29 Nov 2024</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Payment Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">6 Dec 2024</td>
+      </tr>
+    </table>
+
+    <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+      style="color: blueviolet;">DIVIDEND</span> BBCA (Bank Central Asia Tbk)</h5>
+  <table style="font-size: 14px;">
+    <tr>
+      <td style="padding: 5px 0;">Dividend</td>
+      <td style="padding: 5px 0; padding-left: 20px;">Rp 50</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Cum Date</td>
+      <td style="padding: 5px 0; padding-left: 20px;">20 Nov 24</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Ex Date</td>
+      <td style="padding: 5px 0; padding-left: 20px;">21 Nov 24</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Recording Date</td>
+      <td style="padding: 5px 0; padding-left: 20px;">22 Nov 24</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;">Payment Date</td>
+      <td style="padding: 5px 0; padding-left: 20px;">11 Dec 24</td>
+    </tr>
+  </table>
+    
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+        style="color: blueviolet;">DIVIDEND</span> SMSM (Selamat Sempurna Tbk)</h5>
+    <table style="font-size: 14px;">
+      <tr>
+        <td style="padding: 5px 0;">Dividend</td>
+        <td style="padding: 5px 0; padding-left: 20px;">Rp 35</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Cum Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">7 Nov 24</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Ex Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">8 Nov 24</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Recording Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">11 Nov 24</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0;">Payment Date</td>
+        <td style="padding: 5px 0; padding-left: 20px;">21 Nov 24</td>
+      </tr>
+    </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">RUPS</span> ADRO (Alamtri Resources Indonesia Tbk.)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">15 Nov 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Time</td>
+          <td style="padding: 5px 0; padding-left: 20px;">09:00</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Vanue</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Cyber 2 Tower lantai 26. Jl. H.R Rasuna Said Blok X-5 No. 13
+            Jakarta Selatan</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">RUPS</span> TOWR (Sarana Menara Nusantara Tbk)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">25 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Time</td>
+          <td style="padding: 5px 0; padding-left: 20px;">10:00</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Vanue</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Bali Room, Hotel Indonesia Kempinski Jakarta, Jl. MH Thamrin
+            No. 1, Jakarta Pusat, 10310</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">RUPS</span> BNGA (Bank CIMB Niaga Tbk)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">25 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Time</td>
+          <td style="padding: 5px 0; padding-left: 20px;">14:00</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Vanue</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Graha CIMB Niaga, Jl. Jend. Sudirman Kav. 58, Jakarta Selatan
+            - 12190</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">DIVIDEND</span> CNMA (Nusantara Sejahtera Raya Tbk)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Dividend</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Rp 5</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Cum Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">30 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Ex Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">31 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Recording Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">1 Nov 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Payment Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">15 Nov 2024</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">DIVIDEND</span> XTWR (Xenza Tower Digital Ttp)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Dividend</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Rp 250 / Rp 50.000</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Cum Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">15 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Ex Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">16 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Recording Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">17 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Payment Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">18 Oct 2024</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">RUPS</span> ADRO (Adaro Energy Tbk)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">18 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Time</td>
+          <td style="padding: 5px 0; padding-left: 20px;">10:00</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Vanue</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Cyber 2 Tower lantai 26. Jl. H.R Rusuna Said Blok X-5 No.13
+            Jakarta</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">DIVIDEND</span> ASII (Astra Internasional Tbk)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Dividend</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Rp 98</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Cum Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">11 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Ex Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">14 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Recording Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">15 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Payment Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">31 Oct 2024</td>
+        </tr>
+      </table>
+
+      <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: -3px;"> <span
+          style="color: blueviolet;">DIVIDEND</span> MEDC (Medco Energy Indonesia Tbk)</h5>
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Dividend</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Rp 15,75</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Cum Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">11 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Ex Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">14 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Recording Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">15 Oct 2024</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Payment Date</td>
+          <td style="padding: 5px 0; padding-left: 20px;">1 Nov 2024</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Bagian isi keuntungan -->
+    <div id="keuntungan-section" class="content-section" style="display:none;">
+      <p>Masukkan ID INVESTOR yang kamu miliki untuk melihat keuntungan</p>
+      <p>Keuntungan akan diperbarui setiap awal bulan</p>
+      <div class="containerdatainvestor">
+        <form id="dataForm">
+          <label for="id_pelanggan">ID Investor:</label>
+          <input type="text" id="id_pelanggan" name="id_pelanggan" required>
+
+          <button type="submit">Periksa</button>
+        </form>
+
+        <div id="result">
+          <h2>Hasil</h2>
+          <p>Nama: <span id="nama"></span></p>
+          <p>Total Dana: <span id="totalDana"></span></p>
+          <p>Keuntungan: <span id="keuntungan"></span></p>
+        </div>
+
+        <div id="progressBarContainer">
+          <div id="progressBar">
+            <div id="progressBarFill">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bagian Holding -->
+<div id="holding-section" class="content-section" style="display:none;">
+  <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px;">TRANSAKSI TERAKHIR  </h5>
+  <div style="border: 1px solid black; border-radius: 10px; padding: 5px; margin-bottom: -15px;">
+    <p style="font-size: 10px; font-weight: 600; color: black;">
+      • BUY • ELSA (Elnusa Tbk.)
+      <span style="font-size: 8px; color: rgb(91, 91, 91); font-weight: 400; float: right;">23 DEC 2024</span>
+  </p>  
+  <p style="font-size: 10px; font-weight: 600; color: black;">
+    • BUY • ELSA (Elnusa Tbk.)
+    <span style="font-size: 8px; color: rgb(91, 91, 91); font-weight: 400; float: right;">23 DEC 2024</span>
+  </p>
+  <p style="font-size: 10px; font-weight: 600; color: red;">
+    • BUY • MDIY (Daya Intiguna Yasa Tbk.)
+    <span style="font-size: 8px; color: rgb(91, 91, 91); font-weight: 400; float: right;">23 DEC 2024</span>
+  </p>
+  </div>
+  
+  <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px;">SAHAM</h5>
+  <table style="font-size: 14px; width: 100%; border-collapse: collapse;">
+    <!-- Header Kolom -->
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 5px;">Kode</th>
+        <th style="text-align: left; padding: 5px;">Produk</th>
+        <th style="text-align: left; padding: 5px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 5px;">BBCA</td>
+        <td style="padding: 5px;">Bank Central Asia Tbk.</td>
+        <td style="padding: 5px;">=</td> <!-- Segitiga up hijau -->
+      </tr>
+      <tr>
+        <td style="padding: 5px;">BMRI</td>
+        <td style="padding: 5px;">Bank Mandiri Persero Tbk.</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">ELSA</td>
+        <td style="padding: 5px;">Elnusa Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">AADI</td>
+        <td style="padding: 5px;">Adaro Andalan Indonesia Tbk.</td>
+        <td style="padding: 5px; color: green;">&#9650; 7</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">NISP</td>
+        <td style="padding: 5px;">Bank OCBC NISP Tbk.</td>
+        <td style="padding: 5px; color: red;">&#9660; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">ASII</td>
+        <td style="padding: 5px;">Astra International Tbk.</td>
+        <td style="padding: 5px; color: red;">&#9660; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">PTBA</td>
+        <td style="padding: 5px;">Bukit Asam Tbk.</td>
+        <td style="padding: 5px; color: red;">&#9660; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">BRIS</td>
+        <td style="padding: 5px;">Bank Syariah Indonesia Tbk.</td>
+        <td style="padding: 5px; color: red;">&#9660; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">ADRO</td>
+        <td style="padding: 5px;">Alamtri Resources Indonesia Tbk.</td>
+        <td style="padding: 5px;">=</td> <!-- Segitiga down merah -->
+      </tr>
+      <tr>
+        <td style="padding: 5px;">MYOR</td>
+        <td style="padding: 5px;">Mayora Indah Tbk.</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">MDIY</td>
+        <td style="padding: 5px;">Daya Intiguna Yasa Tbk.</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h5 style="border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px; margin-top: 5px;">REKSADANA</h5>
+  <table style="font-size: 14px; width: 100%; border-collapse: collapse;">
+    <!-- Header Kolom -->
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 5px;">Jenis</th>
+        <th style="text-align: left; padding: 5px;">Produk</th>
+        <th style="text-align: left; padding: 5px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 5px;">Pasar Uang</td>
+        <td style="padding: 5px;">BRI Seruni Pasar Uang III</td>
+        <td style="padding: 5px; color: green;">&#9650; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Saham</td>
+        <td style="padding: 5px;">Grow SRI KEHATI Kelas O</td>
+        <td style="padding: 5px;;color: red;">&#9660; 1</td> <!-- Segitiga up hijau -->
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Pasar Uang</td>
+        <td style="padding: 5px;">Majoris Pasar Uang Syariah Indonesia</td>
+        <td style="padding: 5px; color: red;">&#9660; 1</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Saham</td>
+        <td style="padding: 5px;">BNP Paribas SRI KEHATI</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Obligas</td>
+        <td style="padding: 5px;">Manulife Obligasi Negara Indonesia II Kelas A</td>
+        <td style="padding: 5px;">=</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+    <!-- Bagian Profil -->
+    <div id="profil-section" class="content-section" style="display:none;">
+      <p style="font-size: 14px;">Xenza Invest adalah suatu tempat investasi bagi anak muda yang didirikan oleh Xenza
+        Investama bagian dari Xenza Digital Group.</p>
+      <p style="font-size: 14px;">Dengan adanya Xenza Invest ini memudahkan anak muda maupun usia lanjut untuk menyimpan
+        uangnya dengan sekaligus berinvestasi</p>
+
+      <table style="font-size: 14px;">
+        <tr>
+          <td style="padding: 5px 0;">Nama</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Xenza Investama</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Part of</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Xenza Digital Group</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Sektor</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Finansial</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Broker</td>
+          <td style="padding: 5px 0; padding-left: 20px;">
+            XL-Stockbit Sekuritas <br>
+            CC-Mandiri Sekuritas <br>
+            XC-Ajaib Sekuritas <br>
+            PD-Indo Premier Sekuritas <br>
+            YP-Mirae Asset Sekuritas Indonesaia
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Biaya Layanan</td>
+          <td style="padding: 5px 0; padding-left: 20px;">0,05% dari total transaksi</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Biaya Pembelian</td>
+          <td style="padding: 5px 0; padding-left: 20px;">0,0%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Biaya Penjualan</td>
+          <td style="padding: 5px 0; padding-left: 20px;">0,0%</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Minimal Pembelian</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Rp5.000</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Minimal Penjualan</td>
+          <td style="padding: 5px 0; padding-left: 20px;">Rp10.000</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Biaya Penarikan</td>
+          <td style="padding: 5px 0; padding-left: 20px;">
+            Rp3.000 jika Rp10.000-Rp500.000 <br>
+            Rp2.500 jika Rp500.001-Rp1.500.000 <br>
+            Rp1.000 jika Rp1.500.001-Rp10.000.000 <br>
+            Gratis jika >Rp10.000.000
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0;">Rekening Asal Penarikan</td>
+          <td style="padding: 5px 0; padding-left: 20px;">
+            BCA <br>
+            MANDIRI <br>
+            BNI <br>
+            CIMB NIAGA <br>
+            <span style="font-size: 11px; color: silver; font-weight: bold;">Biaya penarikan berlaku jika rekening
+              tujuan berbeda dengan rekening asal</span>
+          </td>
+        </tr>
+      </table>
+
+      <p style="font-size: 14px;">Kami berkomitmen untuk membantu setiap orang yang ingin berinvestasi dipasar modal
+        indonesia dan akan menjaga dan mengalokasikan
+        dana 100% pada sektor pasar modal
+      </p>
+    </div>
+
+  </div>
+
+  <img src="assets/public/img/LOGO_+_NAME-removebg-preview.png" alt=""
+    style="width: 110px; border-radius: 8px; display: block; margin: 40px auto 0 auto;">
+
+  <div id="copyright">
+    &copy; 2024 TECH NOVA GROUP
+    <p style="font-size: 10px; color: rgb(104, 104, 104); font-weight: 400; margin-left: 10px;">v3.7.00</p>
+
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/source/script/script.js"></script>
+  <script src="assets/source/script/orderbook.js"></script>
+  <script src="assets/source/script/navdwon.js"></script>
+  <script src="assets/source/script/api.js"></script>
+  <script src="assets/source/script/grafik.js"></script>
+  <script src="assets/source/script/sidebar.js"></script>
+  <!-- Link ke Bootstrap JS dan dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Tambahkan script.js di bawah ini -->
+  <script src="assets/source/script/chat.js"></script>
+
 </body>
+
 </html>

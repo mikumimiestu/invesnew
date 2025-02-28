@@ -39,12 +39,12 @@ function displayHistory(data) {
     historyList.innerHTML = "";
   
     const transactions = [
-      { status: "Pembayaran Sedang Diverifikasi", date: data.pembayaranSedangDiverifikasi },
-      { status: "Pembayaran Berhasil", date: data.pembayaranBerhasil },
-      { status: "Memproses Pembelian", date: data.verifikasiManajerInvestasi },
+      { status: "Transaksi Sedang Diverifikasi", date: data.pembayaranSedangDiverifikasi },
+      { status: "Verifikasi Berhasil", date: data.pembayaranBerhasil },
+      { status: "Memproses Transaksi", date: data.verifikasiManajerInvestasi },
     //   { status: "Verifikasi Broker", date: data.verifikasiBroker || 'Tidak ada data' }, // Menambahkan fallback jika undefined
     //   { status: "Dana Diteruskan ke Bank Penampung", date: data.danaDiteruskan || 'Tidak ada data' }, // Menambahkan fallback jika undefined
-      { status: "Pembelian Berhasil", date: data.pembelianBerhasil }
+      { status: "Transaksi Berhasil", date: data.pembelianBerhasil }
     ];
   
     transactions.forEach(transaction => {
